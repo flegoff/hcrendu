@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Answering machine
+{% endblock %}
+
+{% block content %}
+<h2>Projects available for registration</h2>
+
+<ul>
+{% for project in projects %}
+  <li><a href="/project/{{project.id}}/register">{{project.title}}</a></li>
+{% empty %}
+  None.
+{% endfor %}
+</ul>
+{% endblock %}
+
+{% block footer %}
+Please use the link received by e-mail to answer your project questions.
+{% endblock %}

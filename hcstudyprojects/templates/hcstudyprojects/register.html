@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Answering machine : registration
+{% endblock %}
+
+{% block content %}
+<h2>Registration for {{project}}</h2>
+
+<form method="post" action="/project/{{project.id}}/register">
+  {% csrf_token %}
+  {{ student_form.as_p }}
+  <input type="submit" value="Submit" />
+</form>
+
+{% endblock %}
+
+{% block footer %}
+Please use the link received by e-mail to answer your project questions.
+{% endblock %}

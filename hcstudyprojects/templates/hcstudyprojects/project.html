@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Answering machine : {{project}}
+{% endblock %}
+
+{% block content %}
+<h2>{{project}}</h2>
+<ul>
+  <li>Opens at: {{project.upload_opens_at}}</li>
+  <li>Ends at: {{project.upload_ends_at}}</li>
+</ul>
+
+{% if project.subject %}
+  <p>{{project.subject}}</p>
+{% endif %}
+
+{% for question in project.projectquestion_set.all %}
+  <h3>Q: {{question}}</h3>
+
+  <div class="question">
+    <div class="subject">{{question.subject}}</div>
+    <a href="/answer/{{question.id}}">Answer</a>
+  </div>
+{% endfor %}
+
+{% endblock %}
+
+
+{% block footer %}
+Please submit your answers before {{project.upload_ends_at}}.<br />
+After this time, you won't be able to access this page or to submit any question.
+{% endblock %}
+
