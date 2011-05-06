@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html lang="fr">
+	<head> 
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+  <meta name="robots" content="NONE,NOARCHIVE"><title>jul14: on the way to Sesam-Vitale</title> 
+  <style type="text/css"> 
+    html * { padding:0; margin:0; }
+    body * { padding:10px 20px; }
+    body * * { padding:0; }
+    body { font:small sans-serif; background:#f6f6f6; }
+    body>div { border-bottom:1px solid #ddd; }
+    h1 { font-weight:normal; }
+    h2 { margin-bottom:.8em; }
+    h2 span { font-size:80%; color:#666; font-weight:normal; }
+    h3 { margin:1em 0 .5em 0; }
+    h4 { margin:0 0 .5em 0; font-weight: normal; }
+    table { border:1px solid #ccc; border-collapse: collapse; width:100%; background:white; }
+    tbody td, tbody th { vertical-align:top; padding:2px 3px; }
+    thead th { padding:1px 6px 1px 3px; background:#fefefe; text-align:left; font-weight:normal; font-size:11px; border:1px solid #ddd; }
+    tbody th { width:12em; text-align:right; color:#666; padding-right:.5em; }
+    ul { margin-left: 2em; margin-top: 1em; }
+    #title { background: #e0ebff; }
+    #title h1 { font-weight: normal; color: #2A2A2A; margin-bottom: 0; }
+    #footer { background:#eee; }
+    #content { font-size: 1.2em;}
+    #title table { border:none; background:transparent; }
+		{% block css %}
+		{% endblock %}
+		a { text-decoration: none; color: #A90B03;}
+		textarea { padding: 0.5em; font-size: 1.2em; }
+		form input { margin: 1em; }
+		.subject { margin: 1em; padding: 1em; background-color: #fff; font-family:'Courier', 'Courier New'}
+	  </style> 
+</head> 
+ 
+<body> 
+<div id="title">
+	<h2>{% block title %}{% endblock %}</h2>
+	{% block subtitle %}{% endblock %}
+</div> 
+ 
+<div id="content"> 
+  
+  {% if messages %}
+  <ul id="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+  
+	{% block content %}
+	{% endblock %}
+</div> 
+ 
+<div id="footer">
+{% block footer %}
+{% endblock %}
+<br />&copy; 2011, 9h37 SAS
+</div> 
+</body></html>

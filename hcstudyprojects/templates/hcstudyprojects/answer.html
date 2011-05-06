@@ -6,28 +6,19 @@
 
 {% block content %}
 <h2>{{project}}</h2>
+
 <ul>
   <li>Opens at: {{project.upload_opens_at}}</li>
   <li>Ends at: {{project.upload_ends_at}}</li>
 </ul>
 
-{% if project.subject %}
-  <p class="subject">{{project.subject|linebreaksbr}}</p>
-{% endif %}
-
-{% for question in project.projectquestion_set.all %}
-  <h3>Q: {{question}}</h3>
+<h3>Q: {{question}}</h3>
 
   <div class="question">
-    <div class="subject">{{question.subject|linebreaksbr}}</div>
-    
-    {% for answer in question.answer_set.all %}
-      <div class="answer">{{answer|linebreaksbr}}</div>
-    {% endfor %}
-    
-    <a href="/answer/{{question.id}}">Answer</a>
+    <div class="subject">{{question.subject}}</div>
   </div>
-{% endfor %}
+
+
 
 {% endblock %}
 

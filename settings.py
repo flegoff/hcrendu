@@ -12,7 +12,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'rendus_proj',                      # Or path to database file if using sqlite3.
+        'NAME': '/home/dotcloud/rendus_proj',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -144,5 +144,7 @@ LOGGING = {
     }
 }
 
-EMAIL_HOST = 'hcserv.local'
-SENDER = 'contact@9h37.fr'
+EMAIL_HOST = 'localhost'
+SENDER = 'florian@9h37.fr'
+
+ADMIN_MEDIA_PREFIX = '/static/admin_media/'
