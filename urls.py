@@ -16,9 +16,11 @@ urlpatterns = patterns('',
     
     url(r'^$', 'hcrendu.hcstudyprojects.views.projects', name="projects"),
     url(r'^project/(?P<project_id>\d+)$', 'hcrendu.hcstudyprojects.views.project', name="project"),
+    url(r'^project/(?P<project_id>\d+)/reinvite$', 'hcrendu.hcstudyprojects.views.project_reinvite', name="project-reinvite"),
     url(r'^project/(?P<project_id>\d+)/register$', 'hcrendu.hcstudyprojects.views.request_access', name="project-register"),
     url(r'^access/(?P<key>\S+)$', 'hcrendu.hcstudyprojects.views.access_project', name="access-project"),
     url(r'^answer/(?P<question_id>\d+)$', 'hcrendu.hcstudyprojects.views.answer_question', name="answer"),
+    url(r'^answer/(?P<question_id>\d+)/(?P<answer_id>\d+)$', 'hcrendu.hcstudyprojects.views.answer_question', name="answer-specific"),
     url(r'^upload/(?P<question_id>\d+)$', 'hcrendu.hcstudyprojects.views.answer_question_with_file', name="upload-answer"),
     
 )

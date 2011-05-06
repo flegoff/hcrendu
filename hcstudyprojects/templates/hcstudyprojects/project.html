@@ -1,8 +1,13 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  Answering machine : {{project}}
+  Answering machine
 {% endblock %}
+
+{% block subtitle %}
+  Project : {{project}}
+{% endblock %}
+
 
 {% block content %}
 <h2>{{project}}</h2>
@@ -15,17 +20,20 @@
   <p class="subject">{{project.subject|linebreaksbr}}</p>
 {% endif %}
 
-{% for question in project.projectquestion_set.all %}
-  <h3>Q: {{question}}</h3>
+{% for qa in qas.values %}
+  <h3>Q: {{qa.question}}</h3>
 
   <div class="question">
-    <div class="subject">{{question.subject|linebreaksbr}}</div>
+    <div class="subject">{{qa.question.subject|linebreaksbr}}</div>
     
-    {% for answer in question.answer_set.all %}
-      <div class="answer">{{answer|linebreaksbr}}</div>
+    {% for answer in qa.answers %}
+      <div class="answer">
+        {{answer.answer|linebreaksbr}}<br />
+        <a href="/answer/{{qa.question.id}}/{{answer.id}}">Update this answer</a>
+      </div>
     {% endfor %}
     
-    <a href="/answer/{{question.id}}">Answer</a>
+    <a href="/answer/{{qa.question.id}}">Add a new answer</a>
   </div>
 {% endfor %}
 

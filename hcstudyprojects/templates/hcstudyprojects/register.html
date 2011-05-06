@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  Answering machine : registration
+  Answering machine
+{% endblock %}
+
+{% block subtitle %}
+  Project : {{project}} : registration
 {% endblock %}
 
 {% block content %}
-<h2>Registration for {{project}}</h2>
+<h2>You're enrolling yourself in {{project}}</h2>
 
 <form method="post" action="/project/{{project.id}}/register">
   {% csrf_token %}

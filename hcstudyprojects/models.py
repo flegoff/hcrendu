@@ -4,10 +4,13 @@ from django.db import models
 from django.forms import ModelForm
 from django import forms
 from django.conf import settings
+from django.core.mail import send_mail
 
 from datetime import datetime
+
 import time
 import hashlib
+import logging
 
 class Project(models.Model):
     date_updated = models.DateTimeField(auto_now=True, editable=False)
@@ -26,9 +29,23 @@ class Project(models.Model):
         if now > self.upload_opens_at and now < self.upload_ends_at:
             return True
         return False
-    
+
     def __unicode__(self):
         return self.title
+
+    def set_student(self, student):
+        self._student = student
+
+    def get_questions_answers(self):
+        qa = {}
+
+        for question in self.projectquestion_set.all():
+            qa[question.id] = {
+                'question': question,
+                'answers': question.studentanswer_set.filter(student=self._student).all()
+            }
+
+        return qa
 
 
 class ProjectQuestion(models.Model):
@@ -43,6 +60,13 @@ class ProjectQuestion(models.Model):
     def __unicode__(self):
         return "{0} {1}".format(self.project, self.title)
 
+    def get_answers(self):
+        try:
+            return self.studentanswer_set.filter(student=self.project._student).all()
+        except AttributeError:
+            logging.error("AttributeError")
+            return None
+
 class AutoRegisteredStudent(models.Model):
     date_updated = models.DateTimeField(auto_now=True, editable=False)
     date_created = models.DateTimeField(auto_now_add=True, editable=False)
@@ -52,22 +76,33 @@ class AutoRegisteredStudent(models.Model):
     surname = models.CharField(max_length=75)
     project = models.ForeignKey(Project)
     key = models.CharField(max_length=45, blank=True)
-    
+
     def __unicode__(self):
         return self.email
-    
+
     def gen_key(self):
         self.save()
         self.key = "{0}{1}".format(self.id, hashlib.sha1("{0}{1}".format(settings.SECRET_KEY, self.project.id)).hexdigest())
         self.save()
 
+    def get_answer(self, question):
+        return self.studentanswer_set.filter(question=question)
+
+    def send_invite(self):
+        send_mail(  'Access link: {0}'.format(self.project),
+            '{0}access/{1}'.format(settings.SITE_URL, self.key),
+            settings.SENDER,
+            [self.email, settings.SENDER],
+            fail_silently=False)
+
+
 class AutoRegisteredStudentForm(ModelForm):
-    
+
     def clean_email(self):
         if not self.cleaned_data['email'].endswith(self.instance.project.email_endswith):
             raise forms.ValidationError("Your e-mail should end with {0}".format(self.instance.project.email_endswith))
         return self.cleaned_data['email']
-    
+
     class Meta:
         model = AutoRegisteredStudent
         fields = ('email', 'name', 'surname', )
@@ -81,7 +116,7 @@ class StudentFile(models.Model):
     student = models.ForeignKey(AutoRegisteredStudent)
     question = models.ForeignKey(ProjectQuestion)
     file = models.FileField(upload_to=get_student_file_path)
-    
+
     def __unicode__(self):
         return "{0} {1}".format(self.student, self.question)
 
@@ -95,7 +130,7 @@ class StudentAnswer(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, editable=False)
     student = models.ForeignKey(AutoRegisteredStudent)
     question = models.ForeignKey(ProjectQuestion)
-    title = models.CharField(max_length=120)
+    title = models.CharField(max_length=120, blank=True)
     answer = models.TextField()
 
     def __unicode__(self):
@@ -104,4 +139,4 @@ class StudentAnswer(models.Model):
 class StudentAnswerForm(ModelForm):
     class Meta:
         model = StudentAnswer
-        fields = ('title', 'answer', )
+        fields = ('answer', )

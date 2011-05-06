@@ -30,12 +30,17 @@
 		textarea { padding: 0.5em; font-size: 1.2em; }
 		form input { margin: 1em; }
 		.subject { margin: 1em; padding: 1em; background-color: #fff; font-family:'Courier', 'Courier New'}
+		.answer { margin: 1em 2em 1em 2em; padding: 1em; background-color: #FFE5FF; font-family:'Courier', 'Courier New'}
+		form { margin: 2em }
+		form input { padding: 5px }
+		form textarea { font-family:'Courier', 'Courier New'; width: 600px; height: 600px }
+		label { display: block }
 	  </style> 
 </head> 
  
 <body> 
 <div id="title">
-	<h2>{% block title %}{% endblock %}</h2>
+	<h1>{% block title %}{% endblock %}</h1>
 	{% block subtitle %}{% endblock %}
 </div> 
  

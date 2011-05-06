@@ -1,16 +1,18 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  Answering machine : {{project}}
+  Answering machine
+{% endblock %}
+
+{% block subtitle %}
+  Project : {{project}} : {{question}}
+  <ul>
+    <li>Opens at: {{project.upload_opens_at}}</li>
+    <li>Ends at: {{project.upload_ends_at}}</li>
+  </ul>
 {% endblock %}
 
 {% block content %}
-<h2>{{project}}</h2>
-
-<ul>
-  <li>Opens at: {{project.upload_opens_at}}</li>
-  <li>Ends at: {{project.upload_ends_at}}</li>
-</ul>
 
 <h3>Q: {{question}}</h3>
 
@@ -18,6 +20,17 @@
     <div class="subject">{{question.subject}}</div>
   </div>
 
+  {% if answer_id %}
+  <form action="/answer/{{question.id}}/{{answer_id}}"
+  {% else %}
+  <form action="/answer/{{question.id}}"
+  {% endif %}
+        enctype="multipart/form-data"
+        method="post">
+        {%csrf_token%}
+        {{answer_form.as_p}}
+        <input type="submit" value="Submit"/>
+  </form>
 
 
 {% endblock %}
