@@ -16,30 +16,31 @@ This project is written in Python and uses the Django framework.
 
     pip -r requirements.txt
 
-Local Installation
-------------------
+Installation
+------------
+
+### Local
 
     cd <directory where manage.py lives>
 
-# Edit the database configuration
+1. Edit the database configuration
 
     $EDITOR settings.py
 
-# Load the data into the database
+2. Load the data into the database
 
     python manage.py  syncdb
 
-# Run the server
+3. Run the server
 
     python manage.py runserver
 
-# Create your first project
+4. Create your first project
 
     http://localhost:8000/admin
 
 
-Remote Installation
--------------------
+### Remote
 
 Please find a tutorial for a Django setup.
 
