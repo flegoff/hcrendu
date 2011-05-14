@@ -27,13 +27,9 @@
     <div class="subject">{{qa.question.subject|linebreaksbr}}</div>
     
     {% for answer in qa.answers %}
-      <pre class="answer">
-        {{answer.answer|linebreaksbr}}
-        {% if project.is_upload_open %}
+      <pre class="answer">{{answer.answer|linebreaksbr}}{% if project.is_upload_open %}
           <br />
-          <a href="/answer/{{qa.question.id}}/{{answer.id}}">Update this answer</a>
-        {% endif %}
-      </pre>
+          <a href="/answer/{{qa.question.id}}/{{answer.id}}">Update this answer</a>{% endif %}</pre>
     {% endfor %}
     
     {% if project.is_upload_open %}

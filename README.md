@@ -3,6 +3,14 @@ hcrendu
 
 Dead simple application for teachers wanting to collect homework on time.
 
+1. Create a project, add your subject and questions.
+
+2. Invite your students to register, they will receive a secure submission link
+
+3. Your students will be able to upload their answers (text or files) during the timeframe specified in the project
+
+4. Enjoy your freetime and less-crowed e-mail inbox
+
 Licence
 -------
 
@@ -25,20 +33,27 @@ Installation
 
 1. Edit the database configuration
 
-    $EDITOR settings.py
+        $EDITOR settings.py
 
 2. Load the data into the database
 
-    python manage.py  syncdb
+        python manage.py syncdb
 
 3. Run the server
 
-    python manage.py runserver
+        python manage.py runserver 0.0.0.0:8000
 
 4. Create your first project
 
-    http://localhost:8000/admin
+        http://localhost:8000/admin
 
+5. Add questions
+
+        http://localhost:8000/admin
+
+6. Invite students to register
+
+        http://<public_ip>:8000/
 
 ### Remote
 
