@@ -25,10 +25,6 @@ def project(request, project_id):
 
     project = get_object_or_404(Project, pk=project_id)
 
-    if not project.is_upload_open():
-        messages.error(request, "It's too late, submissions for this project are now closed.")
-        return HttpResponseRedirect('/project/{0}'.format(project.id))
-
     if not 'student' or not 'projects' in request.session or \
         not project.id in request.session['projects']:
         messages.error(request, "We were not able to authenticate you. Please re-connect.")
@@ -40,6 +36,7 @@ def project(request, project_id):
 
     return render_to_response('hcstudyprojects/project.html',
         { 'project': project,
+          'student': student,
           'qas': project.get_questions_answers() },
         context_instance=RequestContext(request))
 
@@ -83,8 +80,8 @@ def request_access(request, project_id):
     project = get_object_or_404(Project, pk=project_id)
 
     if not project.is_upload_open():
-        messages.error(request, "It's too late, submissions for this project are now closed.")
-        return HttpResponseRedirect('/project/{0}'.format(project.id))
+        messages.error(request, "Too late, submissions for this project are now closed.")
+        return HttpResponseRedirect('/'.format(project.id))
 
     if request.method == 'POST':
         student = AutoRegisteredStudent(project=project)
@@ -118,7 +115,7 @@ def answer_question(request, question_id, answer_id=None):
         return HttpResponseRedirect('/')
 
     if not question.project.is_upload_open():
-        messages.error(request, "It's too late, submissions for this project are now closed.")
+        messages.error(request, "Too late, submissions for this project are now closed.")
         return HttpResponseRedirect('/project/{0}'.format(question.project.id))
 
     if answer_id:
@@ -163,5 +160,5 @@ def answer_question_with_file(request, question_id):
         return HttpResponseRedirect('/')
 
     if not question.project.is_upload_open():
-        messages.error(request, "It's too late, submissions for this project are now closed.")
+        messages.error(request, "Too late, submissions for this project are now closed.")
         return HttpResponseRedirect('/project/{0}'.format(question.project.id))

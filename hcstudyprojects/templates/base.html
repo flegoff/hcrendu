@@ -1,9 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="fr">
-	<head> 
-  <meta http-equiv="content-type" content="text/html; charset=utf-8"> 
-  <meta name="robots" content="NONE,NOARCHIVE"><title>jul14: on the way to Sesam-Vitale</title> 
-  <style type="text/css"> 
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="robots" content="NONE,NOARCHIVE"><title>9h37 rendu</title>
+  <style type="text/css">
     html * { padding:0; margin:0; }
     body * { padding:10px 20px; }
     body * * { padding:0; }
@@ -24,28 +24,56 @@
     #footer { background:#eee; }
     #content { font-size: 1.2em;}
     #title table { border:none; background:transparent; }
-		{% block css %}
-		{% endblock %}
-		a { text-decoration: none; color: #A90B03;}
-		textarea { padding: 0.5em; font-size: 1.2em; }
-		form input { margin: 1em; }
-		.subject { margin: 1em; padding: 1em; background-color: #fff; font-family:'Courier', 'Courier New'}
-		.answer { margin: 1em 2em 1em 2em; padding: 1em; background-color: #FFE5FF; font-family:'Courier', 'Courier New'}
-		form { margin: 2em }
-		form input { padding: 5px }
-		form textarea { font-family:'Courier', 'Courier New'; width: 600px; height: 600px }
-		label { display: block }
-	  </style> 
-</head> 
- 
-<body> 
+    {% block css %}
+    {% endblock %}
+    a { text-decoration: none; color: #A90B03;}
+    textarea { padding: 0.5em; font-size: 1.2em; }
+    form input { margin: 1em; }
+    .subject { margin: 1em; padding: 1em; background-color: #fff; font-family:'Courier', 'Courier New'}
+    .answer { font-size: 0.8em; margin: 1em 2em 1em 2em; padding: 1em; background-color: #FFF; border: 2px solid #fffF8A; font-family:'Courier', 'Courier New'}
+    .answer a { display: block; margin: 2em; background-color: #fff }
+    form { margin: 2em }
+    form input { padding: 5px }
+    form textarea { font-family:'Courier', 'Courier New'; width: 600px; height: 600px }
+    label { display: block }
+    #messages .info, .success, .warning, .error, .validation {
+      border: 1px solid;
+      margin: 10px 0px;
+      padding:15px 10px 15px 50px;
+      background-repeat: no-repeat;
+      background-position: 10px center;
+    }
+    #messages .info {
+      color: #00529B;
+      background-color: #BDE5F8;
+      background-image: url('info.png');
+    }
+    #messages .success {
+      color: #4F8A10;
+      background-color: #DFF2BF;
+      background-image:url('success.png');
+    }
+    #messages .warning {
+      color: #9F6000;
+      background-color: #FEEFB3;
+      background-image: url('warning.png');
+    }
+    #messages .error {
+      color: #D8000C;
+      background-color: #FFBABA;
+      background-image: url('error.png');
+    }
+    </style>
+</head>
+
+<body>
 <div id="title">
-	<h1>{% block title %}{% endblock %}</h1>
-	{% block subtitle %}{% endblock %}
-</div> 
- 
-<div id="content"> 
-  
+  <h1>{% block title %}{% endblock %}</h1>
+  {% block subtitle %}{% endblock %}
+</div>
+
+<div id="content">
+
   {% if messages %}
   <ul id="messages">
       {% for message in messages %}
@@ -53,14 +81,14 @@
       {% endfor %}
   </ul>
   {% endif %}
-  
-	{% block content %}
-	{% endblock %}
-</div> 
- 
+
+  {% block content %}
+  {% endblock %}
+</div>
+
 <div id="footer">
 {% block footer %}
 {% endblock %}
 <br />&copy; 2011, 9h37 SAS
-</div> 
+</div>
 </body></html>

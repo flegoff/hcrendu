@@ -5,15 +5,15 @@
 {% endblock %}
 
 {% block subtitle %}
-  Project : {{project}}
+  <strong>Project</strong> {{project}}<br />
+  <strong>Student</strong> {{student.name}} {{student.surname}}
 {% endblock %}
 
 
 {% block content %}
-<h2>{{project}}</h2>
 <ul>
-  <li>Opens at: {{project.upload_opens_at}}</li>
-  <li>Ends at: {{project.upload_ends_at}}</li>
+  <li><strong>Opens</strong> {{project.upload_opens_at}}</li>
+  <li><strong>Closes</strong> {{project.upload_ends_at}}</li>
 </ul>
 
 {% if project.subject %}
@@ -27,13 +27,18 @@
     <div class="subject">{{qa.question.subject|linebreaksbr}}</div>
     
     {% for answer in qa.answers %}
-      <div class="answer">
-        {{answer.answer|linebreaksbr}}<br />
-        <a href="/answer/{{qa.question.id}}/{{answer.id}}">Update this answer</a>
-      </div>
+      <pre class="answer">
+        {{answer.answer|linebreaksbr}}
+        {% if project.is_upload_open %}
+          <br />
+          <a href="/answer/{{qa.question.id}}/{{answer.id}}">Update this answer</a>
+        {% endif %}
+      </pre>
     {% endfor %}
     
-    <a href="/answer/{{qa.question.id}}">Add a new answer</a>
+    {% if project.is_upload_open %}
+      <a href="/answer/{{qa.question.id}}">Add a new answer</a>
+    {% endif %}
   </div>
 {% endfor %}
 
@@ -42,6 +47,6 @@
 
 {% block footer %}
 Please submit your answers before {{project.upload_ends_at}}.<br />
-After this time, you won't be able to access this page or to submit any question.
+After this time, you won't be able to access to submit any new answers.
 {% endblock %}
 
