@@ -5,14 +5,14 @@
 {% endblock %}
 
 {% block subtitle %}
-  Project : {{project}} : {{question}}
-  <ul>
-    <li>Opens at: {{project.upload_opens_at}}</li>
-    <li>Ends at: {{project.upload_ends_at}}</li>
-  </ul>
+  <strong>Project</strong> {{project}}<br />
+  <strong>Question</strong> {{question}}<br />
+  <strong>Student</strong> {{student.name}} {{student.surname}} / {{student.email}}
 {% endblock %}
 
 {% block content %}
+
+Please hit submit before {{project.upload_ends_at}} or this answer will be lost.
 
 <h3>Q: {{question}}</h3>
 

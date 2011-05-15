@@ -31,7 +31,7 @@ Installation
 
     cd <directory where manage.py lives>
 
-1. Edit the database configuration
+1. Edit the database configuration + the EMAIL_* vars
 
         $EDITOR settings.py
 

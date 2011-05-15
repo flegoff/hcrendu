@@ -45,7 +45,7 @@ def project_reinvite(request, project_id):
     project = get_object_or_404(Project, pk=project_id)
 
     if not request.user.is_staff:
-        messages.error(request, "Operation not permitted")
+        messages.error(request, "Operation not permitted: please connect in the admin section")
         return HttpResponseRedirect('/')
 
     for stud in project.autoregisteredstudent_set.all():

@@ -118,7 +118,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'hcstudyprojects'
+    'hcrendu.hcstudyprojects'
 )
 
 # A sample logging configuration. The only tangible logging
@@ -144,7 +144,10 @@ LOGGING = {
     }
 }
 
-EMAIL_HOST = 'localhost'
-SENDER = 'florian@9h37.fr'
+EMAIL_HOST = ''
+EMAIL_PORT = 587
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+SENDER = ''
 
 ADMIN_MEDIA_PREFIX = '/static/admin_media/'
